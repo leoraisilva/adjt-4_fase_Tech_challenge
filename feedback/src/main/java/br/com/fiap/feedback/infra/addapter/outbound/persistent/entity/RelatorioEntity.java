@@ -10,8 +10,6 @@ public class RelatorioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String idRelatorio;
-    @Column(name = "id_feedback", nullable = false)
-    private String idFeedback;
     @Column(name = "professor", nullable = false)
     private String professor;
     @Column(name = "descricao", nullable = false)

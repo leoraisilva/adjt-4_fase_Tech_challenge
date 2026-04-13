@@ -10,6 +10,6 @@ public class Relatorio {
     }
 
     public RelatorioOutput relatorio (String idFeedback) {
-        return feedbackPorts.relatorio();
+        return feedbackPorts.relatorio(idFeedback);
     }
 }

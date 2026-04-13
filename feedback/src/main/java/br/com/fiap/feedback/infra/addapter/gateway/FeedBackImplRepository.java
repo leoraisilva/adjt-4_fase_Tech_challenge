@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,12 +45,15 @@ public class FeedBackImplRepository implements FeedBackRepository {
 
     @Override
     public FeedBack avaliacao(FeedBack avaliacao) {
-        return feedBackMapper.toDomain(feedBackJpaRepository.save(feedBackMapper.toEntity(avaliacao)));
+        var aluno = usuarioJpaRepository.findByCPF(avaliacao.getAluno().getCpf()).orElseThrow(() -> new RuntimeException("Usurio não encontrado!!"));
+        var professor = usuarioJpaRepository.findByCPF(avaliacao.getProfessor().getCpf()).orElseThrow(() -> new RuntimeException("Usurio não encontrado!!"));
+        return feedBackMapper.toDomain(feedBackJpaRepository.save(feedBackMapper.toEntity(avaliacao)), aluno, professor);
     }
 
     @Override
     public Relatorio aviso(String idFeedback) {
         var feedback = feedBackJpaRepository.findById(idFeedback).orElseThrow(() -> new RuntimeException("Erro na Buscar do feedback em aviso"));
+        var usuario = usuarioJpaRepository.findByCPF(feedback.getProfessor()).orElseThrow(() -> new RuntimeException("Usuario não encontrado!!"));
         var entity = new AvisoEntity(
                 feedback.getIdFeedBack(),
                 feedback.getProfessor(),
@@ -61,8 +65,9 @@ public class FeedBackImplRepository implements FeedBackRepository {
         else if (feedback.getNota() >= 3 && feedback.getNota() < 5) entity.setUrgencia(Urgencia.MEDIA.name());
         else if (feedback.getNota() >= 5 && feedback.getNota() < 8) entity.setUrgencia(Urgencia.MODERADA.name());
         else if (feedback.getNota() >= 8 && feedback.getNota() < 10) entity.setUrgencia(Urgencia.BAIXA.name());
+        var aviso = avisoJpaRepository.save(entity);
 
-        return relatorioMapper.toAvisoDomain(avisoJpaRepository.save(entity));
+        return relatorioMapper.toAvisoDomain(aviso,usuario);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class FeedBackImplRepository implements FeedBackRepository {
                         AvisoEntity::getUrgencia,
                         Collectors.counting()
                 ));
-
+        var usuario = usuarioJpaRepository.findByCPF(professor).orElseThrow(() -> new RuntimeException("Usuario não encontrado!!"));
         var maior = quantidades.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue())
@@ -88,7 +93,7 @@ public class FeedBackImplRepository implements FeedBackRepository {
                 maior.getKey(),
                 maior.getValue()
         );
-        return relatorioMapper.toRelatorioDomain(relatorioJpaRepository.save(relatorio));
+        return relatorioMapper.toRelatorioDomain(relatorioJpaRepository.save(relatorio), usuario);
     }
 
     @Override

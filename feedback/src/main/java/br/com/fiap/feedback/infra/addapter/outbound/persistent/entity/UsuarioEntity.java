@@ -17,17 +17,17 @@ public class UsuarioEntity {
     private String email;
     @Column(name = "tell")
     private String tell;
-    @Column(name = "cpf", unique = true, nullable = false)
-    private String cpf;
+    @Column(name = "CPF", unique = true, nullable = false)
+    private String CPF;
     @Column(name = "curso")
     private String curso;
 
-    public UsuarioEntity(String nome, String tipo, String email, String tell, String cpf, String curso) {
+    public UsuarioEntity(String nome, String tipo, String email, String tell, String CPF, String curso) {
         this.nome = nome;
         this.tipo = tipo;
         this.email = email;
         this.tell = tell;
-        this.cpf = cpf;
+        this.CPF = CPF;
         this.curso = curso;
     }
 
@@ -74,12 +74,12 @@ public class UsuarioEntity {
         this.tell = tell;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCPF() {
+        return CPF;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
     }
 
     public String getCurso() {

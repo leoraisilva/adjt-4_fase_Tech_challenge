@@ -18,8 +18,7 @@ public class FeedBackEntity {
     @Column(name = "nota", nullable = false)
     private int nota;
 
-    public FeedBackEntity(String idFeedBack, String aluno, String professor, String descricao, int nota) {
-        this.idFeedBack = idFeedBack;
+    public FeedBackEntity(String aluno, String professor, String descricao, int nota) {
         this.aluno = aluno;
         this.professor = professor;
         this.descricao = descricao;

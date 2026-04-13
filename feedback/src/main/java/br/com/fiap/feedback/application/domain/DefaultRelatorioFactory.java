@@ -18,9 +18,8 @@ public class DefaultRelatorioFactory implements RelatorioFactory {
     }
 
     @Override
-    public Relatorio newRelatorio(String idFeedback, Usuario professor, String descricao, LocalDateTime dataEnvio, Urgencia urgencia, Long quantidadeAvaliacao) {
+    public Relatorio newRelatorio(Usuario professor, String descricao, LocalDateTime dataEnvio, Urgencia urgencia, Long quantidadeAvaliacao) {
         return new Relatorio.RelatorioBuilder()
-                .withIdFeedback(idFeedback)
                 .withProfessor(professor)
                 .withDescricao(descricao)
                 .withDataEnvio(dataEnvio)

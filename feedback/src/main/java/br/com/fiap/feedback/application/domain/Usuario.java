@@ -70,7 +70,7 @@ public class Usuario {
             return this;
         }
         public UsuarioBuilder withCurso (String curso) {
-            this.nome = nome;
+            this.curso = curso;
             return this;
         }
         public Usuario build () {
