@@ -11,10 +11,10 @@ public enum Urgencia {
             throw new IllegalArgumentException("Nota inválida: " + nota);
         }
 
-        if (nota < 3) return ALTA;
-        if (nota < 5) return MEDIA;
-        if (nota < 8) return MODERADA;
+        if (nota < 3) return BAIXA;
+        if (nota < 5) return MODERADA;
+        if (nota < 8) return MEDIA;
 
-        return BAIXA;
+        return ALTA;
     }
 }
