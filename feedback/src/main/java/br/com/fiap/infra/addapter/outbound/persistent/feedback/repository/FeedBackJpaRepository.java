@@ -1,7 +1,7 @@
-package br.com.fiap.infra.addapter.outbound.persistent.repository;
+package br.com.fiap.infra.addapter.outbound.persistent.feedback.repository;
 
-import br.com.fiap.infra.addapter.outbound.persistent.entity.FeedBackEntity;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import br.com.fiap.infra.addapter.outbound.persistent.feedback.entity.FeedBackEntity;
+import io.quarkus.hibernate.orm.PersistenceUnit;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 

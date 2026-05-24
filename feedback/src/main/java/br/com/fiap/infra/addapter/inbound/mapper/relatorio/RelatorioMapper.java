@@ -1,8 +1,8 @@
-package br.com.fiap.infra.addapter.inbound.mapper;
+package br.com.fiap.infra.addapter.inbound.mapper.relatorio;
 
 import br.com.fiap.application.domain.*;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.RelatorioEntity;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.UsuarioEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.relatorio.entity.RelatorioEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.usuario.entity.UsuarioEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped

@@ -1,15 +1,15 @@
-package br.com.fiap.infra.addapter.inbound.mapper;
+package br.com.fiap.infra.addapter.inbound.mapper.feedback;
 
 import br.com.fiap.application.domain.FeedBack;
 import br.com.fiap.application.domain.FeedBackFactory;
 import br.com.fiap.application.domain.Tipo;
 import br.com.fiap.application.domain.UsuarioFactory;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.FeedBackEntity;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.UsuarioEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.feedback.entity.FeedBackEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.usuario.entity.UsuarioEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class FeedBackMapper implements IFeedBackMapper{
+public class FeedBackMapper implements IFeedBackMapper {
     private final FeedBackFactory feedBackFactory;
     private final UsuarioFactory usuarioFactory;
     public FeedBackMapper (FeedBackFactory feedBackFactory, UsuarioFactory usuarioFactory) {

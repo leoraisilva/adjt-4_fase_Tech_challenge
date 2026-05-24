@@ -1,16 +1,12 @@
 package br.com.fiap.infra.addapter.outbound.controller;
 
-import br.com.fiap.application.domain.Usuario;
 import br.com.fiap.application.useCase.inbound.avaliacao.Avaliacao;
 import br.com.fiap.application.useCase.inbound.aviso.Aviso;
 import br.com.fiap.application.useCase.inbound.novoUsuario.NovoUsuario;
 import br.com.fiap.application.useCase.inbound.novoUsuario.NovoUsuarioInput;
 import br.com.fiap.application.useCase.inbound.relatorio.Relatorio;
-import br.com.fiap.application.useCase.outbound.FeedBackRepository;
 import br.com.fiap.infra.addapter.inbound.dto.AvaliacaoDTO;
 import br.com.fiap.infra.addapter.inbound.dto.UsuarioDTO;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.FeedBackEntity;
-import br.com.fiap.infra.addapter.outbound.persistent.repository.FeedBackJpaRepository;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

@@ -1,4 +1,4 @@
-package br.com.fiap.infra.addapter.outbound.persistent.entity;
+package br.com.fiap.infra.addapter.outbound.persistent.usuario.entity;
 
 
 import jakarta.persistence.*;

@@ -1,6 +1,7 @@
-package br.com.fiap.infra.addapter.outbound.persistent.repository;
+package br.com.fiap.infra.addapter.outbound.persistent.relatorio.repository;
 
-import br.com.fiap.infra.addapter.outbound.persistent.entity.RelatorioEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.relatorio.entity.RelatorioEntity;
+import io.quarkus.hibernate.orm.PersistenceUnit;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 

@@ -5,13 +5,14 @@ import br.com.fiap.application.domain.Relatorio;
 import br.com.fiap.application.domain.Urgencia;
 import br.com.fiap.application.domain.Usuario;
 import br.com.fiap.application.useCase.outbound.FeedBackRepository;
-import br.com.fiap.infra.addapter.inbound.mapper.IFeedBackMapper;
-import br.com.fiap.infra.addapter.inbound.mapper.IRelatorioMapper;
-import br.com.fiap.infra.addapter.inbound.mapper.IUsuarioMapper;
-import br.com.fiap.infra.addapter.outbound.persistent.entity.RelatorioEntity;
-import br.com.fiap.infra.addapter.outbound.persistent.repository.FeedBackJpaRepository;
-import br.com.fiap.infra.addapter.outbound.persistent.repository.RelatorioJpaRepository;
-import br.com.fiap.infra.addapter.outbound.persistent.repository.UsuarioJpaRepository;
+import br.com.fiap.infra.addapter.inbound.mapper.feedback.IFeedBackMapper;
+import br.com.fiap.infra.addapter.inbound.mapper.relatorio.IRelatorioMapper;
+import br.com.fiap.infra.addapter.inbound.mapper.usuario.IUsuarioMapper;
+import br.com.fiap.infra.addapter.outbound.persistent.relatorio.entity.RelatorioEntity;
+import br.com.fiap.infra.addapter.outbound.persistent.feedback.repository.FeedBackJpaRepository;
+import br.com.fiap.infra.addapter.outbound.persistent.relatorio.repository.RelatorioJpaRepository;
+import br.com.fiap.infra.addapter.outbound.persistent.usuario.repository.UsuarioJpaRepository;
+import io.quarkus.hibernate.orm.PersistenceUnit;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
@@ -23,14 +24,20 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class FeedBackImplRepository implements FeedBackRepository {
 
-    private final FeedBackJpaRepository feedBackJpaRepository;
-    private final RelatorioJpaRepository relatorioJpaRepository;
-    private final UsuarioJpaRepository usuarioJpaRepository;
+    FeedBackJpaRepository feedBackJpaRepository;
+    RelatorioJpaRepository relatorioJpaRepository;
+    UsuarioJpaRepository usuarioJpaRepository;
     private final IFeedBackMapper feedBackMapper;
     private final IRelatorioMapper relatorioMapper;
     private final IUsuarioMapper usuarioMapper;
 
-    public FeedBackImplRepository(FeedBackJpaRepository feedBackJpaRepository, RelatorioJpaRepository relatorioJpaRepository, UsuarioJpaRepository usuarioJpaRepository, IFeedBackMapper feedBackMapper, IRelatorioMapper relatorioMapper, IUsuarioMapper usuarioMapper) {
+    public FeedBackImplRepository(
+            FeedBackJpaRepository feedBackJpaRepository,
+            RelatorioJpaRepository relatorioJpaRepository,
+            UsuarioJpaRepository usuarioJpaRepository,
+            IFeedBackMapper feedBackMapper,
+            IRelatorioMapper relatorioMapper,
+            IUsuarioMapper usuarioMapper) {
         this.feedBackJpaRepository = feedBackJpaRepository;
         this.relatorioJpaRepository = relatorioJpaRepository;
         this.usuarioJpaRepository = usuarioJpaRepository;
