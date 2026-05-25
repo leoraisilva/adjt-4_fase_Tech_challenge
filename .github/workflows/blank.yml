@@ -32,13 +32,18 @@ jobs:
         working-directory: feedback
         run: mvn clean package -DskipTests
 
+      - name: DEBUG FULL PATH
+        run: |
+          pwd
+          ls -R
+
       - name: Build e Push da Imagem
-        working-directory: feedback
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: adjtfase/tech_challenge
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          cd feedback
           docker build \
             -f src/main/docker/Dockerfile.jvm \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
