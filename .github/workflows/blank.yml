@@ -29,8 +29,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         
       - name: Build Maven
-        working-directory: feedback
-        run: mvn clean package -DskipTests
+        run: 
+          cd ./feedback
+          mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
         working-directory: feedback
