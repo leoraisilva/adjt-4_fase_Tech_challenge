@@ -29,13 +29,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         
       - name: Build Maven
-        working-directory: feedback
-        run: mvn clean package -DskipTests
-
-      - name: DEBUG FULL PATH
-        run: |
-          pwd
-          ls -R
+        run:
+          cd /home/runner/work/adjt-4_fase_Tech_challenge/adjt-4_fase_Tech_challenge/feedback
+          mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
         env:
