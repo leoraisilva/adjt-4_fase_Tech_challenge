@@ -27,6 +27,9 @@ jobs:
       - name: Login no Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+        
+      - name: Build Maven
+        run: mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
         env:
