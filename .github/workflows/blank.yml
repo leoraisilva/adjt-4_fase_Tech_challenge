@@ -30,7 +30,7 @@ jobs:
         
       - name: Build Maven
         run:
-          cd /home/runner/work/adjt-4_fase_Tech_challenge/adjt-4_fase_Tech_challenge/feedback
+          cd feedback
           mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
