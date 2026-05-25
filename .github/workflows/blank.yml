@@ -29,6 +29,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         
       - name: Build Maven
+        working-directory: feedback
         run: mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
@@ -36,6 +37,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: adjtfase/tech_challenge
           IMAGE_TAG: ${{ github.sha }}
+        working-directory: feedback
         run: |
           docker build \
             -f src/main/docker/Dockerfile.jvm \
