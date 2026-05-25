@@ -27,15 +27,20 @@ jobs:
       - name: Login no Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+      
+      - name: DEBUG - localizar pom.xml
+        run: |
+          echo "PWD:"
+          pwd
+          echo "LISTA RAIZ:"
+          ls -la
+          echo "BUSCANDO POM:"
+          find . -name pom.xml -type f
         
       - name: Build Maven
         working-directory: feedback
         run: |
-          pwd
-          ls -la
-          find . -name pom.xml
           cd feedback
-          ls -la
           mvn clean package -DskipTests
 
       - name: Build e Push da Imagem
