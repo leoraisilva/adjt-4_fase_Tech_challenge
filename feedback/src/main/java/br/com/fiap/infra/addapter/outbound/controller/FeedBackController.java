@@ -7,6 +7,7 @@ import br.com.fiap.application.useCase.inbound.novoUsuario.NovoUsuarioInput;
 import br.com.fiap.application.useCase.inbound.relatorio.Relatorio;
 import br.com.fiap.infra.addapter.inbound.dto.AvaliacaoDTO;
 import br.com.fiap.infra.addapter.inbound.dto.UsuarioDTO;
+import br.com.fiap.infra.listener.SqsListener;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -19,12 +20,14 @@ public class FeedBackController {
     private final Aviso aviso;
     private final Relatorio relatorio;
     private final NovoUsuario novoUsuario;
+    private SqsListener sqsListener;
 
-    public FeedBackController(NovoUsuario novoUsuario, Avaliacao avaliacao, Aviso aviso, Relatorio relatorio) {
+    public FeedBackController(NovoUsuario novoUsuario, Avaliacao avaliacao, Aviso aviso, Relatorio relatorio, SqsListener sqsListener) {
         this.novoUsuario = novoUsuario;
         this.avaliacao = avaliacao;
         this.aviso = aviso;
         this.relatorio = relatorio;
+        this.sqsListener = sqsListener;
     }
 
     @GET
@@ -60,8 +63,17 @@ public class FeedBackController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response avaliacao (AvaliacaoDTO avaliacaoDTO) {
+
+        var avaliarMessage = avaliacao.avaliacao(AvaliacaoDTO.toInput(avaliacaoDTO));
+        String message = "{" +
+                            "aluno : " + avaliarMessage.aluno() + "," +
+                            "professor : " + avaliarMessage.professor() + "," +
+                            "descrição : " + avaliarMessage.descricao() + "," +
+                            "nota : " + avaliarMessage.nota() +
+                        "}";
+        sqsListener.enviar(message);
         return Response.status(Response.Status.CREATED)
-                .entity(avaliacao.avaliacao(AvaliacaoDTO.toInput(avaliacaoDTO)))
+                .entity(avaliarMessage)
                 .build();
     }
 
